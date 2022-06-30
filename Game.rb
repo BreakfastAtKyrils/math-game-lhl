@@ -1,11 +1,11 @@
-#require './Player'
-#require './Turn'
+require './Player.rb'
+require './Turn.rb'
+require './Display.rb'
 
 class Game
-  includes Display
+  include Display
 
   attr_accessor :players
-  
   def initialize
     #setup array with player objects --> lives are inside the player object
     @num_of_players = 2
@@ -19,10 +19,11 @@ class Game
 
   def game_over?(players) 
     players.each do |player|
-      if player['lives'] == 0
+      if player.lives == 0
         return true
+      end
     end
-    false
+    return false
   end
 
   def run_game
@@ -37,8 +38,5 @@ class Game
       active_player_id = (active_player_id + 1) % @num_of_players 
     end
   end
-  #winner_id = active_player_id - 1 % @num_of_players
-    
+  #winner_id = active_player_id - 1 % @num_of_players   
 end
-
-
