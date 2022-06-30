@@ -29,7 +29,9 @@ class Game
     #print player greeting
     puts "Welcome to our boring Math game, #{players[0].name} and #{players[1].name}. Even worse than a bottomed-out queue. Enjoy if possible."
     #print rules
-    puts "The rules are as follows: Taking turns, input your answer to the math question. The first player to lose all lives loses the game! "
+    puts "The rules are as follows: Taking turns, input your answer to the math question.\n 
+    If the answer is incorrect, you will lose 1 life.\n
+    The first player to lose all lives loses the game! "
     puts " -------------------------------------------------------------------"
   end
 
@@ -40,17 +42,26 @@ class Game
     active_player_id = rand(2)
     puts "The randomly-selected first player is: #{players[active_player_id].name}"
         
-    #game_over returns true if a player have 0 lives
     while !game_over?(players)
+      #to refactor
+      puts "NEW TURN: GET READY TO MATH!"
+
       #active players takes their turn
-      #Turn.new(active_player)
-      puts "test turn for #{players[active_player_id].name}"
-      players[active_player_id].lives -= 1
+      current_turn = Turn.new(players[active_player_id])
+      current_turn.display_question
+      answer = current_turn.get_answer
+
+      if !current_turn.validate_answer(answer)
+        players[active_player_id].lives -= 1
+      end
+
+      #Show Score
+      puts "#{players[0].name}: #{players[0].lives} --- #{players[1].name}: #{players[1].lives}"
 
       #change active player
       active_player_id = (active_player_id + 1) % @num_of_players 
     end
-    winner_id = active_player_id - 1 % @num_of_players  
-    puts "The game is over. #{@players[winner_id].name} is the supreme champion!"
+
+    puts "The game is over. #{@players[active_player_id].name} is the supreme champion!"
   end
 end

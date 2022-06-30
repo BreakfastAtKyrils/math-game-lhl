@@ -13,6 +13,10 @@ class Problem
   def ask_Q
     puts "What is #{@num1} #{@operation} #{@num2} ?"
   end
+
+  def correct_response?(num)
+    return @answer == num
+  end
 end
 
 
