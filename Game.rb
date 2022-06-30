@@ -1,15 +1,28 @@
+#require './Player'
+#require './Turn'
+
 class Game
   includes Display
+
+  attr_accessor :players
   
   def initialize
     #setup array with player objects --> lives are inside the player object
     @num_of_players = 2
-    players = [
+    @players = [
       Player.new("Player1", 3),
       Player.new("Player2", 3)
     ] 
-    Display.greeting(players)
-    Display.show_rules
+    #greeting(players)
+    #show_rules
+  end
+
+  def game_over?(players) 
+    players.each do |player|
+      if player['lives'] == 0
+        return true
+    end
+    false
   end
 
   def run_game
@@ -23,12 +36,9 @@ class Game
       #change active player
       active_player_id = (active_player_id + 1) % @num_of_players 
     end
-    
-    winner_id = active_player_id - 1 % @num_of_players
-    
-    Display.end_game(players['winner_id'])
   end
+  #winner_id = active_player_id - 1 % @num_of_players
+    
 end
 
-math_game = Game.new()
-math_game.run_game 
+
