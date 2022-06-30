@@ -1,14 +1,11 @@
 require './Player.rb'
 require './Turn.rb'
-require './Display.rb'
 require './Problem.rb'
 
 class Game
-  include Display
 
   attr_accessor :players
   def initialize
-    #setup array with player objects --> lives are inside the player object
     @num_of_players = 2
     @players = [
       Player.new("Player1", 3),
@@ -26,9 +23,7 @@ class Game
   end
 
   def initial_greeting_and_rules
-    #print player greeting
     puts "Welcome to our boring Math game, #{players[0].name} and #{players[1].name}. Even worse than a bottomed-out queue. Enjoy if possible."
-    #print rules
     puts "The rules are as follows: Taking turns, input your answer to the math question.\n 
     If the answer is incorrect, you will lose 1 life.\n
     The first player to lose all lives loses the game! "
@@ -38,7 +33,6 @@ class Game
   def run_game
     initial_greeting_and_rules()
 
-    #initialize active_player 
     active_player_id = rand(2)
     puts "The randomly-selected first player is: #{players[active_player_id].name}"
         
@@ -46,7 +40,7 @@ class Game
       #to refactor
       puts "NEW TURN: GET READY TO MATH!"
 
-      #active players takes their turn
+      #turn (active player)
       current_turn = Turn.new(players[active_player_id])
       current_turn.display_question
       answer = current_turn.get_answer
@@ -55,10 +49,8 @@ class Game
         players[active_player_id].lives -= 1
       end
 
-      #Show Score
       puts "#{players[0].name}: #{players[0].lives} --- #{players[1].name}: #{players[1].lives}"
 
-      #change active player
       active_player_id = (active_player_id + 1) % @num_of_players 
     end
 

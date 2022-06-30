@@ -1,4 +1,3 @@
-#this class takes in 2 random numbers and an operation 
 class Problem
   attr_reader :answer
   attr_writer :num1, :num2, :operation
@@ -18,18 +17,3 @@ class Problem
     return @answer == num
   end
 end
-
-
-##-----------testing below-------------##
-
-=begin
-Q = Problem.new(300, 2, '/')
-Q.ask_Q
-user_answer = gets.chomp.to_i
-puts "You answered: #{user_answer}"
-if user_answer == Q.answer
-  puts "correct! good job"
-else
-  puts "wrong! you lose 1 life!"
-end
-=end
