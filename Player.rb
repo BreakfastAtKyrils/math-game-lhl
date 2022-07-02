@@ -6,4 +6,8 @@ class Player
       @name = name
       @lives = lives
   end
+
+  def render_lives
+    "\u2764".encode('utf-8') * @lives
+  end
 end
