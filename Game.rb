@@ -49,7 +49,7 @@ class Game
         players[active_player_id].lives -= 1
       end
 
-      puts "#{players[0].name}: #{players[0].lives} --- #{players[1].name}: #{players[1].lives}"
+      puts "#{players[0].name}: #{players[0].render_lives} --- #{players[1].name}: #{players[1].render_lives}"
 
       active_player_id = (active_player_id + 1) % @num_of_players 
     end
