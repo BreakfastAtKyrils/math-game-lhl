@@ -5,12 +5,19 @@ require './Problem.rb'
 class Game
 
   attr_accessor :players
+
+  
   def initialize
-    @num_of_players = 2
-    @players = [
-      Player.new("Player1", 3),
-      Player.new("Player2", 3)
-    ] 
+    puts "How many players wish to play?"
+    @num_of_players = gets.chomp.to_i
+
+    puts "How many lives per player?"
+    @lives = gets.chomp.to_i
+    @players = [] 
+    (1..@num_of_players).each do |i| 
+      puts "Enter the name for Player#{i}"
+      @players << Player.new(gets.chomp, @lives)
+    end
   end
 
   def game_over?(players) 
